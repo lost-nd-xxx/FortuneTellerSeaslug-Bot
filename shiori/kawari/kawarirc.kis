@@ -1,3 +1,0 @@
-System.Callback.OnGET : ${${System.Request.ID}}
-OnMastodonTootRequest : ‰Ø˜a—œ‚ª$[ ($(date %k) + 9) % 24 ]$(date %N)•ª‚ğ‚¨’m‚ç‚¹‚µ‚Ü‚·B\n#ukadon_bot
-#UTC‚È‚Ì‚Å9‚ğ‘«‚·
