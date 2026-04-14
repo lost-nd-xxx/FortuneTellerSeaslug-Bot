@@ -112,13 +112,19 @@ if __name__ == '__main__':
 			mention_to = status_obj['account']['acct']
 			notification_id = notification['id']
 			content = status_obj.get('content', '')
+			mention_visibility = status_obj.get('visibility', 'unlisted')
+			#公開範囲: public/unlistedはunlisted、private/directはdirect
+			if mention_visibility in ('public', 'unlisted'):
+				reply_visibility = 'unlisted'
+			else:
+				reply_visibility = 'direct'
 			#「占って」が含まれるかで返信内容を切り替える
 			if '占って' in content:
 				reply_text = get_message_for_mention(shiori)
 			else:
 				reply_text = get_message_for_mention_no_fortune(shiori)
 			post_entry(mastodon_url, access_token, reply_text,
-				visibility=visibility,
+				visibility=reply_visibility,
 				in_reply_to_id=in_reply_to_id,
 				mention_to=mention_to)
 			dismiss_notification(mastodon_url, access_token, notification_id)
