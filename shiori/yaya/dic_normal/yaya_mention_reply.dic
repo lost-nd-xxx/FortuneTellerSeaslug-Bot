@@ -18,7 +18,7 @@
 {
 	_card = Fortune_CardsList[RAND(33)]
 
-	_talk = 占い前コメント + '\n\n'
+	_talk = 占い前コメント + '\n'
 	_talk += "出たカードは、「%(_card[0])の%(_card[1])」ミャ。\n\n"
 	_talk += EVAL('占い解説'+_card[0]) + '\n\n'
 	_talk += EVAL('占い解説'+_card[1]) + '\n\n'
