@@ -16,7 +16,7 @@
 
 メンション返信占い
 {
-	_card = Fortune_CardsList(rand[33])
+	_card = Fortune_CardsList(RAND(33))
 
 	_talk = ''
 	_talk += _card[0] + '\n\n'
