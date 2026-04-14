@@ -2,3 +2,13 @@ OnMastodonTootRequest
 {
 	ランダムトーク通常
 }
+
+OnMastodonMentionRequest
+{
+	メンション返信占い
+}
+
+OnMastodonMentionNoFortuneRequest
+{
+	メンション返信通常
+}
