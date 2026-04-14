@@ -17,6 +17,8 @@
 メンション返信占い
 {
 	_card = Fortune_CardsList[RAND(33)]
+	_card[0] = EVAL('占い解説'+_card[0])
+	_card[1] = EVAL('占い解説'+_card[1])
 
 	_talk = 占い前コメント + '\n\n'
 	_talk += _card[0] + '\n\n'
