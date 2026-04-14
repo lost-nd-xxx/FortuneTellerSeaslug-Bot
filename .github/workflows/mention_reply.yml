@@ -1,5 +1,7 @@
 name: YAYA Mention Reply
 on:
+  schedule:
+    - cron: '*/30 * * * *'  # 30分ごと
   workflow_dispatch:
 jobs:
   reply:
