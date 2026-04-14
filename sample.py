@@ -66,8 +66,7 @@ def get_message_for_mention_no_fortune(shiori):
 def get_mentions(mastodon_url, access_token):
 	url = f'{mastodon_url}api/v1/notifications'
 	headers = {'Authorization': f'Bearer {access_token}'}
-	params = {'types[]': 'mention'}
-	r = requests.get(url, params=params, headers=headers)
+	r = requests.get(url, headers=headers, params=[('types[]', 'mention')])
 	r.raise_for_status()
 	return r.json()
 
