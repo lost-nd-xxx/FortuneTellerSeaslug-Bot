@@ -39,6 +39,7 @@ def get_message_for_mention(shiori):
 	subprocess.run(fr'shioricaller\shioricaller.exe {dllpath} {dlldir} < shioricaller\mention_request.txt > shioricaller\response.txt', shell=True)
 	with open(r'shioricaller\response.txt', encoding=enc) as f:
 		for line in f:
+			print(f'response line: {line!r}')
 			if line.startswith('Value: '):
 				s = line[7:]
 				break
