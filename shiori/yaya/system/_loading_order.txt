@@ -1,2 +1,2 @@
-dicdir, aya_lilith
+# dicdir, aya_lilith
 dicdir, yaya_base
