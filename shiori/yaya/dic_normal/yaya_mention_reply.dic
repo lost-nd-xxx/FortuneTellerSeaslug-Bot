@@ -16,9 +16,9 @@
 
 メンション返信占い
 {
-	_card = Fortune_CardsList(RAND(33))
+	_card = Fortune_CardsList[RAND(33)]
 
-	_talk = ''
+	_talk = 占い前コメント + '\n\n'
 	_talk += _card[0] + '\n\n'
 	_talk += _card[1] + '\n\n'
 	_talk += 占いの擬音 + '\n'
