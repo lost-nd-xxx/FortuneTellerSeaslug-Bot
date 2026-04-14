@@ -36,13 +36,10 @@ def get_message_for_mention(shiori):
 		dlldir += r'\shiori\yaya\\'
 		enc = 'utf-8'
 	s = ''
-	with open(r'shioricaller\mention_request.txt', 'rb') as fin:
-		result = subprocess.run(
-			[r'shioricaller\shioricaller.exe', dllpath, dlldir],
-			stdin=fin, capture_output=True
-		)
+	result = subprocess.run(fr'shioricaller\shioricaller.exe {dllpath} {dlldir} < shioricaller\mention_request.txt > shioricaller\response.txt', shell=True)
 	print(f'shioricaller returncode: {result.returncode}')
-	content_raw = result.stdout.decode(enc)
+	with open(r'shioricaller\response.txt', encoding=enc) as f:
+		content_raw = f.read()
 	print(f'response content: {content_raw!r}')
 	for line in content_raw.splitlines():
 		if line.startswith('Value: '):
