@@ -112,17 +112,21 @@ if __name__ == '__main__':
 			mention_to = status_obj['account']['acct']
 			notification_id = notification['id']
 			content = status_obj.get('content', '')
+			mention_visibility = status_obj.get('visibility', 'unlisted')
+			print(f'content: {content}')
+			print(f'visibility: {mention_visibility}')
 			#「占って」が含まれるかで返信内容を切り替える
 			if '占って' in content:
 				reply_text = get_message_for_mention(shiori)
 			else:
 				reply_text = get_message_for_mention_no_fortune(shiori)
-			post_entry(mastodon_url, access_token, reply_text,
-				visibility=visibility,
-				in_reply_to_id=in_reply_to_id,
-				mention_to=mention_to)
-			dismiss_notification(mastodon_url, access_token, notification_id)
-			print(f'@{mention_to} へ返信しました: {reply_text}')
+			print(f'reply_text: {reply_text}')
+			print(f'[DRY RUN] @{mention_to} へ返信予定: {reply_text}')
+			#post_entry(mastodon_url, access_token, reply_text,
+			#	visibility=visibility,
+			#	in_reply_to_id=in_reply_to_id,
+			#	mention_to=mention_to)
+			#dismiss_notification(mastodon_url, access_token, notification_id)
 	else:
 		#定期投稿モード
 		status = get_message(shiori)
