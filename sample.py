@@ -36,15 +36,12 @@ def get_message_for_mention(shiori):
 		dlldir += r'\shiori\yaya\\'
 		enc = 'utf-8'
 	s = ''
-	result = subprocess.run(fr'shioricaller\shioricaller.exe {dllpath} {dlldir} < shioricaller\mention_request.txt > shioricaller\response.txt', shell=True)
-	print(f'shioricaller returncode: {result.returncode}')
+	subprocess.run(fr'shioricaller\shioricaller.exe {dllpath} {dlldir} < shioricaller\mention_request.txt > shioricaller\response.txt', shell=True)
 	with open(r'shioricaller\response.txt', encoding=enc) as f:
-		content_raw = f.read()
-	print(f'response content: {content_raw!r}')
-	for line in content_raw.splitlines():
-		if line.startswith('Value: '):
-			s = line[7:]
-			break
+		for line in f:
+			if line.startswith('Value: '):
+				s = line[7:]
+				break
 	s = s.replace(r'\n', '\n')
 	return s
 
@@ -115,21 +112,17 @@ if __name__ == '__main__':
 			mention_to = status_obj['account']['acct']
 			notification_id = notification['id']
 			content = status_obj.get('content', '')
-			mention_visibility = status_obj.get('visibility', 'unlisted')
-			print(f'content: {content}')
-			print(f'visibility: {mention_visibility}')
 			#「占って」が含まれるかで返信内容を切り替える
 			if '占って' in content:
 				reply_text = get_message_for_mention(shiori)
 			else:
 				reply_text = get_message_for_mention_no_fortune(shiori)
-			print(f'reply_text: {reply_text}')
-			print(f'[DRY RUN] @{mention_to} へ返信予定: {reply_text}')
-			#post_entry(mastodon_url, access_token, reply_text,
-			#	visibility=visibility,
-			#	in_reply_to_id=in_reply_to_id,
-			#	mention_to=mention_to)
-			#dismiss_notification(mastodon_url, access_token, notification_id)
+			post_entry(mastodon_url, access_token, reply_text,
+				visibility=visibility,
+				in_reply_to_id=in_reply_to_id,
+				mention_to=mention_to)
+			dismiss_notification(mastodon_url, access_token, notification_id)
+			print(f'@{mention_to} へ返信しました: {reply_text}')
 	else:
 		#定期投稿モード
 		status = get_message(shiori)
