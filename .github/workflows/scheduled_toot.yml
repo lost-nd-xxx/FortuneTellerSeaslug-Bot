@@ -1,4 +1,4 @@
-name: YAYA Sample
+name: YAYA Scheduled Toot
 on:
   schedule:
     - cron: '0 0 * * *'   # 毎日 9:00 JST
@@ -22,5 +22,5 @@ jobs:
           python-version: '3.10'
       - name: pip install
         run: pip install -r requirements.txt
-      - name: Sample
-        run: python sample.py yaya
+      - name: Toot
+        run: python main.py yaya

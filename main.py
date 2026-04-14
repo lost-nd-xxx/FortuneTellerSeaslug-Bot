@@ -106,11 +106,18 @@ if __name__ == '__main__':
 		mentions = get_mentions(mastodon_url, access_token)
 		if not mentions:
 			print('返信すべきメンションはありませんでした。')
+		replied_accounts = set()
 		for notification in mentions:
 			status_obj = notification['status']
 			in_reply_to_id = status_obj['id']
 			mention_to = status_obj['account']['acct']
 			notification_id = notification['id']
+			#同一アカウントへの返信は1回の実行で1件まで（最新のメンションのみ返信）
+			if mention_to in replied_accounts:
+				dismiss_notification(mastodon_url, access_token, notification_id)
+				print(f'@{mention_to} への重複メンションをスキップしました。')
+				continue
+			replied_accounts.add(mention_to)
 			content = status_obj.get('content', '')
 			mention_visibility = status_obj.get('visibility', 'unlisted')
 			#公開範囲: public/unlistedはunlisted、private/directはdirect
