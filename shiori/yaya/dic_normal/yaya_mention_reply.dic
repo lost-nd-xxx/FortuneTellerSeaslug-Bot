@@ -11,17 +11,22 @@
 	'ミャ！？'
 	'んミャ！？'
 	--
-	'\n……ぷーに占って欲しいときは、「占って」って言うミャ。'
+	'\n\n……ぷーに占って欲しいときは、「占って」って言うミャ。'
+	''
 }
 
 メンション返信占い
 {
-	_card = Fortune_CardsList[RAND(33)]
+	_card = Fortune_CardsList
+	_reversed = '正,'
+	if RAND(2) == 0 {
+		_reversed = '逆,逆'
+	}
 
 	_talk = 占い前コメント + '\n'
-	_talk += "出たカードは、「%(_card[0])の%(_card[1])」ミャ。\n\n"
-	_talk += EVAL('占い解説'+_card[0]) + '\n\n'
-	_talk += EVAL('占い解説'+_card[1]) + '\n\n'
+	_talk += "出たカードは、「%(_card[0])の%(_card[1])」、%(_reversed[0])位置ミャ。\n\n"
+	_talk += EVAL('占い解説'+_card[0]+_reversed[1]) + '\n\n'
+	_talk += EVAL('占い解説'+_card[1]+_reversed[1]) + '\n\n'
 	_talk += 占いの擬音 + '\n'
 	_talk += 占い後コメント
 

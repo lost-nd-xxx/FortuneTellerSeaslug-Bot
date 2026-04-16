@@ -5,18 +5,21 @@ OnMastodonTootRequest
 	if _rand == 0 {
 		_time = (hour() + 9) % 24
 		case _time {
-			when 9 {
-				ランダムトーク朝
-			}
-			when 15 {
-				ランダムトーク昼
-			}
-			when 21 {
-				ランダムトーク夜
-			}
-			others {
-				ランダムトーク通常
-			}
+			when 5-8 { ランダムトーク朝 }
+			when 9-15 { ランダムトーク昼 }
+			when 16,17 { ランダムトーク夕方 }
+			when 18-22 { ランダムトーク夜 }
+			when 23,0,1,2,3,4 { ランダムトーク深夜 }
+			others { ランダムトーク通常 }
+		}
+	}
+	elseif _rand == 1 {
+		case month() {
+			when 3-5 { ランダムトーク春 }
+			when 6-8 { ランダムトーク夏 }
+			when 9-11 { ランダムトーク秋 }
+			when 12,1,2 { ランダムトーク冬 }
+			others { ランダムトーク通常 }
 		}
 	}
 	else {
